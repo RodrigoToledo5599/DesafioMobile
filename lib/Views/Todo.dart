@@ -16,33 +16,45 @@ class Todo extends StatelessWidget{
       home: Scaffold(
         appBar: UpBar(),
         bottomNavigationBar: Navigate(),
-        body: Container(
-            width: MediaQuery.of(context).size.width * 1,
-            // color: Color.fromRGBO(245, 245, 245, 1),
-          child:Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:[
-              SingleChildScrollView(
-                child:
-                  Column(
-                    children:[
-                      Task(),
-                      Task(),
-                      Task(),
-                      Task(),
-                    ]
-                  ),
+        body:
+            Center(
+              child:
+              Container(
+                  width: MediaQuery.of(context).size.width * 1,
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  color: Color.fromRGBO(245, 245, 245, 1),
+                  child:SingleChildScrollView(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children:[
+                            Column(
+                                children:[
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
+                                  Task(),
 
+                                ]
+                            ),
+                          ]
+                      )
+                  )
               ),
+            )
 
+        )
+      );
 
-            ]
-          )
-        ),
-
-      )
-    );
   }
-
 }

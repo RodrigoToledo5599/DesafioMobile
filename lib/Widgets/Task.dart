@@ -30,31 +30,44 @@ class _Task extends State<Task>{
       },
       child:Container(
           width: MediaQuery.of(context).size.width * 0.85,
-
           color: Color.fromRGBO(245, 247, 249,1),
-          // color: Color.fromRGBO(245, 0, 0,1),
+          // color: Color.fromRGBO(132, 86, 54,1),
           child:
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
               children:[
                 Row(
-                    children:[
-                      Checkbox(
-                        checkColor: Colors.white,
-                        value: isChecked,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            isChecked = !isChecked;
-                          });
-                        },
-                      ),
-                      Text("wqqdqwdq"),
-                    ]
+                  children:[
+                    Checkbox(
+                      checkColor: Colors.white,
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = !isChecked;
+                        });
+                      },
+                    ),
+                    Text("Titulo da parada"),
+                  ]
                 ),
                 if(isOpen == true)
-                  Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
-                      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ")
+                  Container(
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      child:
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:[
+                              Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                                   "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                                    softWrap: true
+                              ),
+                            ]
+                          )
+
+                  )
                 else
-                  Text(""),
+                  Container()
               ]
           )
       )
