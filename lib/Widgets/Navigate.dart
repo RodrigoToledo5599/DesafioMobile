@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:desafiomobile/Views/Todo.dart';
 import 'package:desafiomobile/Views/Create.dart';
 import 'package:desafiomobile/Views/Search.dart';
@@ -9,14 +8,12 @@ import 'package:desafiomobile/Views/Done.dart';
 
 
 
-
 class Navigate extends StatelessWidget{
-
   @override
   Widget build(BuildContext context){
     return Container(
-      // color: Colors.white,
         width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.08,
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -122,9 +119,13 @@ class Navigate extends StatelessWidget{
                 ),
               ),
 
+
+
+
+
+
             ]
         )
     );
-
   }
 }

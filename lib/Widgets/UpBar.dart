@@ -20,7 +20,7 @@ class UpBar extends StatelessWidget implements PreferredSizeWidget{
                     child:
                     Row(
                         children:[
-                          SizedBox(width: MediaQuery.sizeOf(context).width * 0.07),
+                          SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
                           Icon(
                             Icons.check_box,
                             color: Colors.blue,
@@ -54,7 +54,7 @@ class UpBar extends StatelessWidget implements PreferredSizeWidget{
                             color: Colors.blue,
                             size: 30,
                           ),
-                          SizedBox(width: MediaQuery.sizeOf(context).width * 0.07),
+                          SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
                         ]
                     )
                 ),

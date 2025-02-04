@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
 import 'package:desafiomobile/Widgets/Navigate.dart';
-import 'package:desafiomobile/Widgets/Task.dart';
+import 'package:desafiomobile/Widgets/TodoTask.dart';
 
 
 class Todo extends StatelessWidget{
   const Todo({Key? key}) : super(key: key);
-
 
   @override
   Widget build (BuildContext context){
@@ -21,8 +20,8 @@ class Todo extends StatelessWidget{
               child:
               Container(
                   width: MediaQuery.of(context).size.width * 1,
-                  height: MediaQuery.of(context).size.height * 0.75,
-                  color: Color.fromRGBO(245, 245, 245, 1),
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  color: Color.fromRGBO(255, 255, 255, 1),
                   child:SingleChildScrollView(
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,31 +29,47 @@ class Todo extends StatelessWidget{
                           children:[
                             Column(
                                 children:[
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-                                  Task(),
-
+                                  Container(
+                                    child:Column(
+                                      children:[
+                                        Row(
+                                          children:[
+                                            SizedBox(width: MediaQuery.sizeOf(context).width * 0.06),
+                                            Text("Welcome,"),
+                                            Text("John",)
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
+                                  TodoTask(),
+                                  SizedBox(height: 10),
                                 ]
                             ),
-                          ]
+                          ],
                       )
                   )
               ),
             )
-
         )
       );
-
   }
 }
