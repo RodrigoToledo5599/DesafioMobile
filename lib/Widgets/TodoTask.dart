@@ -5,6 +5,12 @@ import 'package:flutter/material.dart';
 
 
 class TodoTask extends StatefulWidget {
+  final int id;
+  final String Name;
+  final String Description;
+
+  const TodoTask({Key? key, required this.id, required this.Name, required this.Description}) : super(key: key);
+
   @override
   _TodoTask createState() => _TodoTask();
 }
@@ -59,7 +65,7 @@ class _TodoTask extends State<TodoTask>{
                         ),
                         Flexible( // Allows text to be constrained inside available width
                           child: Text(
-                            "Titulo da paradaddaeoiaweiouqhro42",
+                            "${widget.Name}",
                             overflow: TextOverflow.ellipsis,
                             maxLines: maxlinesAllowed,
                             softWrap: false,
@@ -76,8 +82,7 @@ class _TodoTask extends State<TodoTask>{
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:[
-                              Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                                  "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+                              Text("${widget.Description}",
                                   softWrap: true
                               ),
                             ]

@@ -14,7 +14,7 @@ const CREATE_DB_SCRIPT =
     "   id INTEGER PRIMARY KEY, "
     "   $TaskName TEXT NOT NULL, "
     "   $TaskDescription TEXT, "
-    "   $TaskDoneOrNot BOOLEAN NOT NULL, "
+    "   $TaskDoneOrNot BOOLEAN NOT NULL "
     ")";
 
 

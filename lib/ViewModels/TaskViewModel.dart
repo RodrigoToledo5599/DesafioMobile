@@ -9,7 +9,7 @@ class TaskViewModel{
 
   DatabaseHelper db = new DatabaseHelper();
 
-  Future<List<Map<String, dynamic>>>? getAllTasks(){
+  Future<List<Map<String,dynamic>>>? getAllTasks(){
     Future<List<Map<String, dynamic>>>? result =  db.getTasks();
     return result;
   }
