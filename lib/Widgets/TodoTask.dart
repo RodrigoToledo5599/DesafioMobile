@@ -1,3 +1,4 @@
+import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class _TodoTask extends State<TodoTask>{
   bool isChecked = false;
   bool isOpen = false;
   int maxlinesAllowed = 1;
+  TaskViewModel tvm = new TaskViewModel();
 
   void openCloseTitle(){
     setState(() {
@@ -36,8 +38,6 @@ class _TodoTask extends State<TodoTask>{
         onTap: (){
           openAndCloseText();
           openCloseTitle();
-
-          print(isOpen);
         },
         child:Container(
             width: MediaQuery.of(context).size.width * 0.85,
@@ -59,7 +59,7 @@ class _TodoTask extends State<TodoTask>{
                         ),
                         Flexible( // Allows text to be constrained inside available width
                           child: Text(
-                            "Titulo da paradaddaeoiaweiouqhrowhqriu2hni42h4i2h4i2h4iu2h34iu2hi4ih234ui23ui4ui234hui2h3i4ui234hui23",
+                            "Titulo da paradaddaeoiaweiouqhro42",
                             overflow: TextOverflow.ellipsis,
                             maxLines: maxlinesAllowed,
                             softWrap: false,

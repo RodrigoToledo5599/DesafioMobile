@@ -22,11 +22,10 @@ const CREATE_DB_SCRIPT =
 const SEED_TABLE =[
   "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Tirar o Lixo','Colocar o lixo pra fora as 16:00','0')",
   "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Fazer Compras','Comprar queijo, presunto e pão','1')",
-  "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('','','0')",
-  "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Fazer Compras','','1')",
-  "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Fazer Compras','','0')",
-  "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Fazer Compras','','1')",
-
+  "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Limpar a cozinha','Lavar a louça suja e limpar o fogão','0')",
+  "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Malhar','treino de perna','1')",
+  "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Estudar para a prova de Calculo III','Estudar a lista de exercício para prova na quinta feira','0')",
+  "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Jiu jitsu','Jiu jitsu terça e quinta','1')",
   "INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('Levar o carro na oficina','O carro tem apresentado um barulho estranho no motor e deve ser investigado','0')",
 ];
 

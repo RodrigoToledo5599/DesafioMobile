@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
 import 'package:desafiomobile/Widgets/Navigate.dart';
 import 'package:desafiomobile/Widgets/TodoTask.dart';
 
 
 class Todo extends StatelessWidget{
-  const Todo({Key? key}) : super(key: key);
+  Todo({Key? key}) : super(key: key);
+  TaskViewModel tvm = new TaskViewModel();
 
   @override
   Widget build (BuildContext context){
@@ -22,7 +24,7 @@ class Todo extends StatelessWidget{
                   width: MediaQuery.of(context).size.width * 1,
                   height: MediaQuery.of(context).size.height * 0.8,
                   color: Color.fromRGBO(255, 255, 255, 1),
-                  child:SingleChildScrollView(
+                  child: SingleChildScrollView(
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,34 +36,15 @@ class Todo extends StatelessWidget{
                                       children:[
                                         Row(
                                           children:[
-                                            SizedBox(width: MediaQuery.sizeOf(context).width * 0.06),
+                                            SizedBox(width: MediaQuery.sizeOf(context).width * 0.08),
                                             Text("Welcome,"),
-                                            Text("John",)
+                                            Text("John")
                                           ]
                                         )
                                       ]
                                     )
                                   ),
                                   TodoTask(),
-                                  SizedBox(height: 10),
-                                  TodoTask(),
-                                  SizedBox(height: 10),
-                                  TodoTask(),
-                                  SizedBox(height: 10),
-                                  TodoTask(),
-                                  SizedBox(height: 10),
-                                  TodoTask(),
-                                  SizedBox(height: 10),
-                                  TodoTask(),
-                                  SizedBox(height: 10),
-                                  TodoTask(),
-                                  SizedBox(height: 10),
-                                  TodoTask(),
-                                  SizedBox(height: 10),
-                                  TodoTask(),
-                                  SizedBox(height: 10),
-                                  TodoTask(),
-                                  SizedBox(height: 10),
                                 ]
                             ),
                           ],
