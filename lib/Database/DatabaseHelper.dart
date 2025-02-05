@@ -20,10 +20,10 @@ class DatabaseHelper{
     );
   }
 
-  Future<List<Map<String,dynamic>>>? getTasks() async {
+  Future<List<Map<String,dynamic>>>? getTasksDone() async {
     try {
       final Database db = await _getDatabase();
-      final Future<List<Map<String, dynamic>>> maps = db.query(TASK_TABLE_NAME);
+      final Future<List<Map<String, dynamic>>> maps = db.query(TASK_TABLE_NAME,where: "Done = 1");
       return maps;
     } catch (ex) {
       print(ex);
@@ -31,6 +31,16 @@ class DatabaseHelper{
     }
   }
 
+  Future<List<Map<String,dynamic>>>? getTasksNotDone() async {
+    try {
+      final Database db = await _getDatabase();
+      final Future<List<Map<String, dynamic>>> maps = db.query(TASK_TABLE_NAME,where: "Done = 0");
+      return maps;
+    } catch (ex) {
+      print(ex);
+      return new List<Map<String,dynamic>>.empty();
+    }
+  }
 
   Future<List<Map<String,dynamic>>>? getTask(String name) async {
     try {

@@ -20,7 +20,7 @@ class Todo extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.8,
             color: Colors.white,
             child: FutureBuilder<List<Map<String, dynamic>>>(
-              future: tvm.getAllTasks(), // Fetch tasks asynchronously
+              future: tvm.getTasksDone(), // Fetch tasks asynchronously
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator()); // Show loading spinner
@@ -59,6 +59,7 @@ class Todo extends StatelessWidget {
                             id: task["id"] ?? "N/A",
                             Name: task["Name"] ?? "Untitled Task",
                             Description: task["Description"] ?? "No description",
+                            Done: task["Done"]
                           );
                         }).toList(),
                       ),

@@ -8,8 +8,9 @@ class TodoTask extends StatefulWidget {
   final int id;
   final String Name;
   final String Description;
+  final int Done;
 
-  const TodoTask({Key? key, required this.id, required this.Name, required this.Description}) : super(key: key);
+  const TodoTask({Key? key, required this.id, required this.Name, required this.Description, required this.Done}) : super(key: key);
 
   @override
   _TodoTask createState() => _TodoTask();
@@ -41,7 +42,7 @@ class _TodoTask extends State<TodoTask>{
 
   Widget build(BuildContext context){
     return GestureDetector(
-        onTap: (){
+        onTap:(){
           openAndCloseText();
           openCloseTitle();
         },
@@ -58,7 +59,7 @@ class _TodoTask extends State<TodoTask>{
                           checkColor: Colors.white,
                           value: isChecked,
                           onChanged: (bool? value) {
-                            setState(() {
+                            setState((){
                               isChecked = !isChecked;
                             });
                           },
@@ -71,7 +72,6 @@ class _TodoTask extends State<TodoTask>{
                             softWrap: false,
                           ),
                         ),
-
                       ]
                   ),
                   if(isOpen == true)
@@ -82,14 +82,18 @@ class _TodoTask extends State<TodoTask>{
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:[
-                              Text("${widget.Description}",
-                                  softWrap: true
+                              SizedBox(width:MediaQuery.of(context).size.width * 0.1),
+                              Text(
+                                  "${widget.Description}",
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: maxlinesAllowed,
                               ),
+                              SizedBox(width:MediaQuery.of(context).size.width * 0.1),
                             ]
                         )
                     )
                   else
-                    Container()
+                    Container(),
                 ]
             )
         )

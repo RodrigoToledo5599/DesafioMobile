@@ -1,8 +1,15 @@
+import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
 class DoneTask extends StatefulWidget {
+  final int id;
+  final String Name;
+  final String Description;
+  final int Done;
+
+  const DoneTask({Key? key, required this.id, required this.Name, required this.Description, required this.Done}) : super(key: key);
   @override
   _DoneTask createState() => _DoneTask();
 }
@@ -10,6 +17,7 @@ class DoneTask extends StatefulWidget {
 class _DoneTask extends State<DoneTask>{
   bool isChecked = false;
   int maxlinesAllowed = 1;
+  TaskViewModel tvm = new TaskViewModel();
 
 
   void openCloseTitle(){
@@ -55,7 +63,7 @@ class _DoneTask extends State<DoneTask>{
                                   ),
                                   Flexible( // Allows text to be constrained inside available width
                                     child: Text(
-                                      "Titulo da paradadddddddddddddddddddddddddddddddddddddddddwwwwwwwwwwwwwwwwwwwww",
+                                      "${widget.Name}",
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: maxlinesAllowed,
                                       softWrap: false,
