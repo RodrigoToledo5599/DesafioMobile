@@ -11,33 +11,34 @@ class UpBar extends StatelessWidget implements PreferredSizeWidget{
     return AppBar(
       actions: [
         Container(
-          width: MediaQuery.sizeOf(context).width *1,
+          width: MediaQuery.sizeOf(context).width * 1,
           child:
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children:[
                 Container(
-                    child:
-                    Row(
-                        children:[
-                          SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
-                          Icon(
-                            Icons.check_box,
-                            color: Colors.blue,
-                            size: 30,
+                  child: Row(
+                      children:[
+                        SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
+                        Icon(
+                          Icons.check_box,
+                          color: Colors.blue,
+                          size: 33,
+                        ),
+                        Text(
+                          "Taski",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            letterSpacing: 1.5,
                           ),
-                          Text(
-                            "Taski",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18, // Font size
-                              letterSpacing: 1.5, // Letter spacing
-                            ),
-                          ),
-                        ]
-                    )
+                        ),
+                      ]
+                  ),
+                  color: Color.fromRGBO(255, 255, 255, 1),
                 ),
                 Container(
+                    color: Color.fromRGBO(255, 255, 255, 1),
                     child:
                     Row(
                         children:[

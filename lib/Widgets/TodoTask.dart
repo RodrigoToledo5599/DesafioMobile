@@ -64,7 +64,7 @@ class _TodoTask extends State<TodoTask>{
                             });
                           },
                         ),
-                        Flexible( // Allows text to be constrained inside available width
+                        Flexible(
                           child: Text(
                             "${widget.Name}",
                             overflow: TextOverflow.ellipsis,

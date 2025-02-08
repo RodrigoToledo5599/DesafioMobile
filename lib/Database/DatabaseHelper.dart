@@ -55,14 +55,19 @@ class DatabaseHelper{
   }
 
 
-  Future createTask(String task_name,String task_description) async{
-    try{
-      final Database db = await _getDatabase();
-      await db.rawInsert('''
-        INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('${task_name}','${task_description}','0')
-      '''); //Tarefa que acabou de ser criada só pode ser 0 em doneOrNot.
-    }catch(ex){
+  Future createTask(String? task_name,String? task_description, String done) async{
+    if(task_name == "" && task_description == ""){
       return;
+    }
+    else{
+      try{
+        final Database db = await _getDatabase();
+        await db.rawInsert('''
+        INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('${task_name}','${task_description}','$done')
+      '''); //Tarefa que acabou de ser criada só pode ser 0 em doneOrNot.
+      }catch(ex){
+        return;
+      }
     }
   }
 

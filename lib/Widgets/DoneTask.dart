@@ -1,7 +1,7 @@
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DoneTask extends StatefulWidget {
   final int id;
@@ -72,9 +72,8 @@ class _DoneTask extends State<DoneTask>{
                                 ]
                             )
                           ),
-                          Icon(
-                            color: Colors.red,
-                            Icons.restore_from_trash,
+                          SvgPicture.asset(
+                              'lib/assets/imgs/TrashIcon.svg',
                           )
                         ]
                     ),

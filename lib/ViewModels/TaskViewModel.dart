@@ -24,5 +24,8 @@ class TaskViewModel{
     return result;
   }
 
+  void createTask(String? title, String? description, bool done){
+    done == true ? db.createTask(title, description, '1') : db.createTask(title, description, '0');
+  }
 
 }

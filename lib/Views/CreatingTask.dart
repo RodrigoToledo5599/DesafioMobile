@@ -3,9 +3,10 @@ import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
 import 'package:desafiomobile/Widgets/Navigate.dart';
 import 'package:desafiomobile/Widgets/TodoTask.dart';
+import 'package:desafiomobile/Widgets/CreateTask.dart';
 
-class Todo extends StatelessWidget {
-  Todo({Key? key}) : super(key: key);
+class CreatingTask extends StatelessWidget {
+  CreatingTask({Key? key}) : super(key: key);
   final TaskViewModel tvm = TaskViewModel(); // Instantiate ViewModel
 
   @override
@@ -14,10 +15,10 @@ class Todo extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: UpBar(),
-        bottomNavigationBar: Navigate(),
+        bottomNavigationBar: CreateTask(),
         body: Center(
           child: Container(
-            height: MediaQuery.of(context).size.height * 1,
+            height: MediaQuery.of(context).size.height * 0.8,
             color: Colors.white,
             child: FutureBuilder<List<Map<String, dynamic>>>(
               future: tvm.getTasksDone(), // Fetch tasks asynchronously
@@ -31,7 +32,6 @@ class Todo extends StatelessWidget {
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return Center(child: Text("No tasks available"));
                 }
-
                 List<Map<String, dynamic>> tasks = snapshot.data!;
 
                 return SingleChildScrollView(
@@ -39,26 +39,24 @@ class Todo extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      // Greeting Section
                       Container(
                         padding: EdgeInsets.all(16),
                         child: Row(
                           children: [
                             SizedBox(width: MediaQuery.sizeOf(context).width * 0.08),
                             Text("Welcome,"),
-                            Text(
-                                "John",
-                                style: TextStyle(fontWeight: FontWeight.bold)
-                            ),
+                            Text("John", style: TextStyle(fontWeight: FontWeight.bold)),
                           ],
                         ),
                       ),
                       Column(
                         children: tasks.map((task) {
                           return TodoTask(
-                            id: task["id"] ?? "N/A",
-                            Name: task["Name"] ?? "Untitled Task",
-                            Description: task["Description"] ?? "No description",
-                            Done: task["Done"]
+                              id: task["id"] ?? "N/A",
+                              Name: task["Name"] ?? "Untitled Task",
+                              Description: task["Description"] ?? "No description",
+                              Done: task["Done"]
                           );
                         }).toList(),
                       ),

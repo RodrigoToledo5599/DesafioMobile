@@ -12,6 +12,7 @@ class Navigate extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
+        color:Color.fromRGBO(255, 255, 255, 1),
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.08,
         child: Row(
@@ -51,7 +52,8 @@ class Navigate extends StatelessWidget{
                     )
                 );
               },
-                icon: Icon(
+                icon:
+                Icon(
                     Icons.create,
                     size:35
                 ),
