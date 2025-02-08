@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:desafiomobile/Views/Todo.dart';
+import 'package:desafiomobile/Views/TodoView.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: Todo(),
+      home: TodoView(),
     );
   }
 }

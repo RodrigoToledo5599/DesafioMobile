@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
 import 'package:desafiomobile/Widgets/Navigate.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'dart:async';
 
 
 
-class Search extends StatefulWidget {
-  Search({Key? key}) : super(key: key);
+class SearchView extends StatefulWidget {
+  SearchView({Key? key}) : super(key: key);
 
   @override
-  _Search createState() => _Search();
+  _SearchView createState() => _SearchView();
 }
 
 
-class _Search extends State<Search>{
+class _SearchView extends State<SearchView>{
   @override
   Widget build (BuildContext context){
     return MaterialApp(
@@ -31,11 +32,19 @@ class _Search extends State<Search>{
                   height: MediaQuery.of(context).size.height * 0.8,
                   color: Color.fromRGBO(255, 255, 255, 1),
                   child:SingleChildScrollView(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children:[]
-                    ),
+                      child: Form(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:[
+                              SizedBox(height: MediaQuery.of(context).size.height * 0.3),
+                              SvgPicture.asset(
+                                'lib/assets/imgs/cadernetasIcon.svg',
+                                fit: BoxFit.contain,
+                              ),
+                            ]
+                        ),
+                      )
                   )
               )
           ),

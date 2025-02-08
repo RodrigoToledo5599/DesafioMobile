@@ -3,9 +3,11 @@ import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
 import 'package:desafiomobile/Widgets/Navigate.dart';
 import 'package:desafiomobile/Widgets/TodoTask.dart';
+import 'package:desafiomobile/Widgets/WelcomeJohn.dart';
+import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBox.dart';
 
-class Todo extends StatelessWidget {
-  Todo({Key? key}) : super(key: key);
+class TodoView extends StatelessWidget {
+  TodoView({Key? key}) : super(key: key);
   final TaskViewModel tvm = TaskViewModel(); // Instantiate ViewModel
 
   @override
@@ -41,24 +43,15 @@ class Todo extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.all(16),
-                        child: Row(
-                          children: [
-                            SizedBox(width: MediaQuery.sizeOf(context).width * 0.08),
-                            Text("Welcome,"),
-                            Text(
-                                "John",
-                                style: TextStyle(fontWeight: FontWeight.bold)
-                            ),
-                          ],
-                        ),
+                        child: WelcomeJohn(numberOfTasks: tasks.length)
                       ),
                       Column(
                         children: tasks.map((task) {
                           return TodoTask(
-                            id: task["id"] ?? "N/A",
-                            Name: task["Name"] ?? "Untitled Task",
-                            Description: task["Description"] ?? "No description",
-                            Done: task["Done"]
+                              id: task["id"] ?? "N/A",
+                              Name: task["Name"] ?? "Untitled Task",
+                              Description: task["Description"] ?? "No description",
+                              Done: task["Done"]
                           );
                         }).toList(),
                       ),

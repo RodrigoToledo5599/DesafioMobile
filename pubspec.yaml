@@ -65,10 +65,17 @@ flutter:
     - lib/assets/imgs/cadernetasIcon.svg
     - lib/assets/imgs/CreateIcon.svg
     - lib/assets/imgs/DoneIcon.svg
+    - lib/assets/imgs/checklistImg.svg
     - lib/assets/imgs/JohnFace.png
     - lib/assets/imgs/SearchIcon.svg
     - lib/assets/imgs/TodoIcon.svg
     - lib/assets/imgs/TrashIcon.svg
+
+  fonts:
+    - family: Urbanist
+      fonts:
+        - asset: lib/fonts/Urbanist/static/Urbanist-Light.ttf
+#        - asset: lib/fonts/Urbanist/static/Urbanist-Black.ttf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

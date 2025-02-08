@@ -1,4 +1,5 @@
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
+import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBox.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,13 @@ class _TodoTask extends State<TodoTask>{
   int maxlinesAllowed = 1;
   TaskViewModel tvm = new TaskViewModel();
 
+
+  void updateCheckBoxState(bool value) {
+    setState(() {
+      isChecked = value;
+    });
+  }
+
   void openCloseTitle(){
     setState(() {
       if(maxlinesAllowed == 1){
@@ -46,56 +54,53 @@ class _TodoTask extends State<TodoTask>{
           openAndCloseText();
           openCloseTitle();
         },
-        child:Container(
-            width: MediaQuery.of(context).size.width * 0.85,
-            color: Color.fromRGBO(245, 247, 249,1),
-            child:
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                  Row(
-                      children:[
-                        Checkbox(
-                          checkColor: Colors.white,
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            setState((){
-                              isChecked = !isChecked;
-                            });
-                          },
-                        ),
-                        Flexible(
-                          child: Text(
-                            "${widget.Name}",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: maxlinesAllowed,
-                            softWrap: false,
-                          ),
-                        ),
-                      ]
-                  ),
-                  if(isOpen == true)
-                    Container(
-                        width: MediaQuery.of(context).size.width * 0.75,
-                        child:
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children:[
-                              SizedBox(width:MediaQuery.of(context).size.width * 0.1),
-                              Text(
-                                  "${widget.Description}",
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: maxlinesAllowed,
+        child:Column(
+          children:[
+            SizedBox(height: MediaQuery.of(context).size.height * 0.014),
+            Container(
+                color: Color.fromRGBO(245, 247, 249,1),
+                width: MediaQuery.of(context).size.width * 0.85,
+                child:
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      Row(
+                          children:[
+                            CustomCheckBox(controlVariable: isChecked, onChanged: updateCheckBoxState),
+                            Flexible(
+                              child: Text(
+                                "${widget.Name}",
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: maxlinesAllowed,
+                                softWrap: false,
                               ),
-                              SizedBox(width:MediaQuery.of(context).size.width * 0.1),
-                            ]
+                            ),
+                          ]
+                      ),
+                      if(isOpen == true)
+                        Container(
+                            width: MediaQuery.of(context).size.width * 0.75,
+                            child:
+                            Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children:[
+                                  SizedBox(width:MediaQuery.of(context).size.width * 0.1),
+                                  Text(
+                                    "${widget.Description}",
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: maxlinesAllowed,
+                                  ),
+                                  SizedBox(width:MediaQuery.of(context).size.width * 0.1),
+                                ]
+                            )
                         )
-                    )
-                  else
-                    Container(),
-                ]
+                      else
+                        Container(),
+                    ]
+                )
             )
+          ]
         )
     );
   }

@@ -1,4 +1,5 @@
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
+import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBox.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,6 +20,11 @@ class _DoneTask extends State<DoneTask>{
   int maxlinesAllowed = 1;
   TaskViewModel tvm = new TaskViewModel();
 
+  void updateCheckBoxState(bool value){
+    setState(() {
+      isChecked = value;
+    });
+  }
 
   void openCloseTitle(){
     setState(() {
@@ -52,15 +58,7 @@ class _DoneTask extends State<DoneTask>{
                             child:
                             Row(
                                 children:[
-                                  Checkbox(
-                                    checkColor: Colors.white,
-                                    value: isChecked,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        isChecked = !isChecked;
-                                      });
-                                    },
-                                  ),
+                                  CustomCheckBox(controlVariable: isChecked, onChanged: updateCheckBoxState),
                                   Flexible( // Allows text to be constrained inside available width
                                     child: Text(
                                       "${widget.Name}",

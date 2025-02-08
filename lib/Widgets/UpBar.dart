@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 class UpBar extends StatelessWidget implements PreferredSizeWidget{
@@ -20,16 +21,14 @@ class UpBar extends StatelessWidget implements PreferredSizeWidget{
                   child: Row(
                       children:[
                         SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
-                        Icon(
-                          Icons.check_box,
-                          color: Colors.blue,
-                          size: 33,
-                        ),
+                        SvgPicture.asset('lib/assets/imgs/checklistImg.svg'),
                         Text(
-                          "Taski",
+                          " Taski",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
+                            fontFamily: 'Urbanist',
+                            fontWeight: FontWeight.w600,
                             letterSpacing: 1.5,
                           ),
                         ),
@@ -43,17 +42,20 @@ class UpBar extends StatelessWidget implements PreferredSizeWidget{
                     Row(
                         children:[
                           Text(
-                            "John",
+                            "John  ",
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 16, // Font size
+                              fontFamily: 'Urbanist',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18, // Font size
                               letterSpacing: 1.5, // Letter spacing
                             ),
                           ),
-                          Icon(
-                            Icons.account_circle,
-                            color: Colors.blue,
-                            size: 30,
+                          ClipOval(
+                            child:Image.asset(
+                              'lib/assets/imgs/JohnFace.png',
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
                         ]
@@ -68,5 +70,4 @@ class UpBar extends StatelessWidget implements PreferredSizeWidget{
   }
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
-
 }

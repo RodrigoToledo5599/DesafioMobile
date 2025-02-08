@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
-import 'package:desafiomobile/Views/Todo.dart';
+import 'package:desafiomobile/Views/TodoView.dart';
+import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBox.dart';
 import 'dart:async';
 
 
@@ -20,21 +21,13 @@ class _CreateTask extends State<CreateTask>{
   TaskViewModel tvm = new TaskViewModel();
   String? title, description;
 
-
+  void updateCheckBoxState(bool value) {
+    setState(() {
+      isChecked = value;
+    });
+  }
 
   Widget build (BuildContext context){
-    Color getColor(Set<WidgetState> states) {
-      const Set<WidgetState> interactiveStates = <WidgetState>{
-        WidgetState.pressed,
-        WidgetState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return Colors.white;
-      }
-      return Color.fromRGBO(198, 207, 220, 1);
-    }
-
-
 
     return
       Container(
@@ -72,22 +65,9 @@ class _CreateTask extends State<CreateTask>{
                                 ),
                                 Container(
                                   width: MediaQuery.of(context).size.width * 0.07,
-                                  child:
-                                  Checkbox(
-                                    side: BorderSide(
-                                      color: Color.fromRGBO(198, 207, 220, 1),
-                                      width: 2.0,
-                                    ),
-                                    checkColor: Colors.white,
-                                    value: isChecked,
-                                    fillColor: WidgetStateProperty.resolveWith(getColor),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(3)),
-                                    onChanged: (bool? value) {
-                                      setState((){
-                                        isChecked = !isChecked;
-                                      });
-                                    },
+                                  child: CustomCheckBox(
+                                    controlVariable: isChecked,
+                                    onChanged: updateCheckBoxState,
                                   ),
                                 ),
                                 SizedBox(
@@ -120,8 +100,7 @@ class _CreateTask extends State<CreateTask>{
                                 ),
                                 Container(
                                   width: MediaQuery.of(context).size.width * 0.07,
-                                  child:
-                                  Icon(
+                                  child: Icon(
                                     Icons.create,
                                     size: 28,
                                     color: Color.fromRGBO(198, 207, 220, 1),
@@ -155,10 +134,10 @@ class _CreateTask extends State<CreateTask>{
                             children:[
                               ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white, // Cor de fundo
-                                    foregroundColor: Colors.blue, // Cor do texto
-                                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12), // Espaçamento interno
-                                    textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), // Estilo do texto
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: Colors.blue,
+                                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                                    textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                     shadowColor: Colors.transparent, // No shadow
                                   ),
                                   onPressed: () {
@@ -168,7 +147,7 @@ class _CreateTask extends State<CreateTask>{
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => Todo(),
+                                              builder: (context) => TodoView(),
                                           )
                                       );
                                     }
@@ -178,7 +157,6 @@ class _CreateTask extends State<CreateTask>{
                               SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.066,
                               ),
-
                             ]
                           )
                         ]

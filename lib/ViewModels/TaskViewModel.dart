@@ -28,4 +28,7 @@ class TaskViewModel{
     done == true ? db.createTask(title, description, '1') : db.createTask(title, description, '0');
   }
 
+  void deleteATask(String id){
+    db.deleteATask(id);
+  }
 }

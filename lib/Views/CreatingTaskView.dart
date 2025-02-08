@@ -1,12 +1,13 @@
+import 'package:desafiomobile/Widgets/WelcomeJohn.dart';
 import 'package:flutter/material.dart';
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
-import 'package:desafiomobile/Widgets/Navigate.dart';
 import 'package:desafiomobile/Widgets/TodoTask.dart';
 import 'package:desafiomobile/Widgets/CreateTask.dart';
 
-class CreatingTask extends StatelessWidget {
-  CreatingTask({Key? key}) : super(key: key);
+class CreatingTaskView extends StatelessWidget {
+  CreatingTaskView({Key? key}) : super(key: key);
+
   final TaskViewModel tvm = TaskViewModel(); // Instantiate ViewModel
 
   @override
@@ -42,13 +43,7 @@ class CreatingTask extends StatelessWidget {
                       // Greeting Section
                       Container(
                         padding: EdgeInsets.all(16),
-                        child: Row(
-                          children: [
-                            SizedBox(width: MediaQuery.sizeOf(context).width * 0.08),
-                            Text("Welcome,"),
-                            Text("John", style: TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
+                        child:WelcomeJohn(numberOfTasks: tasks.length)
                       ),
                       Column(
                         children: tasks.map((task) {
