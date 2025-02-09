@@ -1,6 +1,6 @@
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Views/DoneView.dart';
-import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBox.dart';
+import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBoxDone.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,8 +10,17 @@ class DoneTask extends StatefulWidget {
   final String Name;
   final String Description;
   final int Done;
+  final Function(String) metodo;
 
-  const DoneTask({Key? key, required this.id, required this.Name, required this.Description, required this.Done}) : super(key: key);
+  const DoneTask({
+    Key? key,
+    required this.id,
+    required this.Name,
+    required this.Description,
+    required this.Done,
+    required this.metodo,
+  }) : super(key: key);
+
   @override
   _DoneTask createState() => _DoneTask();
 }
@@ -38,7 +47,6 @@ class _DoneTask extends State<DoneTask>{
     });
   }
 
-
   Widget build(BuildContext context){
     return GestureDetector(
         onTap: (){
@@ -63,14 +71,18 @@ class _DoneTask extends State<DoneTask>{
                               child:
                               Row(
                                   children:[
-                                    CustomCheckBox(controlVariable: isChecked, onChanged: updateCheckBoxState),
-                                    Flexible( // Allows text to be constrained inside available width
+                                    CustomCheckBoxDone(
+                                        Id: widget.id.toString(),
+                                        controlVariable: isChecked,
+                                        onChanged: updateCheckBoxState,
+                                        updatecheckedId: (id) => widget.metodo(id),
+                                    ),
+                                    Flexible(
                                       child: Text(
                                         "${widget.Name}",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: maxlinesAllowed,
                                         softWrap: false,
-
                                       ),
                                     ),
                                   ]
@@ -100,7 +112,6 @@ class _DoneTask extends State<DoneTask>{
                               'lib/assets/imgs/TrashIcon.svg',
                             )
                           )
-
                         ]
                     ),
                   ),
@@ -108,7 +119,6 @@ class _DoneTask extends State<DoneTask>{
             ),
           )
         ]
-
       ),
     );
   }

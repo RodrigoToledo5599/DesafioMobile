@@ -22,7 +22,7 @@ class TodoView extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 1,
             color: Colors.white,
             child: FutureBuilder<List<Map<String, dynamic>>>(
-              future: tvm.getTasksDone(), // Fetch tasks asynchronously
+              future: tvm.getTasksNotDone(), // Fetch tasks asynchronously
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator()); // Show loading spinner

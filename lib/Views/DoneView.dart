@@ -15,6 +15,7 @@ class DoneView extends StatefulWidget {
 }
 
 class _DoneViewState extends State<DoneView>{
+
   TaskViewModel tvm = new TaskViewModel();
   List<Map<String, dynamic>>? tasks = [];
   Map<String, bool> checkedTasks = {};
@@ -29,46 +30,52 @@ class _DoneViewState extends State<DoneView>{
     List<Map<String, dynamic>>? fetchedTasks = await tvm.getTasksDone();
     setState(() {
       tasks = fetchedTasks;
-      if(tasks == null || tasks ==[]){
+      if(tasks!.isEmpty){
         return;
       }
       List<String> ids = <String>[];
-      for(int i=0; i<=tasks!.length; i++){
-        ids.add(tasks![i]['id']);
+      List<bool> checkedIds = <bool>[];
+      for(int i=0; i < tasks!.length; i++){
+        ids.add(tasks![i]['id'].toString());
+        checkedIds.add(false);
       }
-      checkedTasks = Map<String,bool>.fromIterable(ids,
-        key: (item) => item,
-        value: (item) => false,
-      );
+      this.checkedTasks = Map<String, bool>.fromIterables(ids, checkedIds);
     });
-    for(int i=0; i<=checkedTasks!.length; i++){
-      print(checkedTasks[i]);
-    }
+    print(tasks);
+    // this.checkedTasks.forEach((key, value) {
+    //   print("$key: $value");
+    // });
   }
 
-  void updateTaskStatus(String taskId, bool? value) {
-    setState(() {
-      checkedTasks[taskId] = value!;
-    });
+  updateTaskStatus(String taskId) {
+    // setState(() {
+    //   checkedTasks[taskId] = checkedTasks[taskId]!;
+    //   // checkedTasks[taskId] == true ?  checkedTasks[taskId] = false : checkedTasks[taskId] = 1 ;
+    // });
+    // print("Updated Task $taskId: Done = ${checkedTasks[taskId]}");
+  }
 
-    // Here you would update the database to persist the change
-    print("Updated Task $taskId: Done = ${checkedTasks[taskId]}");
+  List<String> getcheckedTaskIds() {
+    return checkedTasks.entries
+        .where((entry) => true)
+        .map((entry) => entry.key)
+        .toList();
   }
 
 
   void deleteAllSelected(BuildContext context){
-    for(int i=0; i< checkedTasks.length; i++){
-      print(checkedTasks.entries);
-      // if(checkedTasks[i] == "1"){
-      //   tvm.deleteATask(checkedTasks.entries.firstWhere( == id));
-      // }
+    List<String> checkedIds = this.getcheckedTaskIds();
+    for(int i=0; i< checkedIds.length; i++){
+    //   if(checkedTasks[i][] == "1"){
+    //     tvm.deleteATask(checkedTasks[]);
+    //   }
     }
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DoneView(),
-        )
-    );
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => DoneView(),
+    //     )
+    // );
 
   }
 
@@ -84,8 +91,9 @@ class _DoneViewState extends State<DoneView>{
                   height: MediaQuery.of(context).size.height * 1,
                   width: MediaQuery.of(context).size.width * 1,
                   color: Color.fromRGBO(255, 255, 255, 1),
-                  child: FutureBuilder<List<Map<String,dynamic>>>(
+                  child: FutureBuilder<List<Map<String,dynamic>>?>(
                       future: this.tvm.getTasksDone(),
+                      // future: this.tasks,
                       builder: (context, snapshot){
                         if (snapshot.connectionState == ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator()); // Show loading spinner
@@ -151,14 +159,13 @@ class _DoneViewState extends State<DoneView>{
                                                       id: task["id"] ?? "N/A",
                                                       Name: task["Name"] ?? "Untitled Task",
                                                       Description: task["Description"] ?? "No description",
-                                                      Done: task["Done"]
+                                                      Done: task["Done"],
+                                                      metodo: (taskId) => updateTaskStatus(task['id'].toString()),
                                                   );
                                                 }).toList(),
                                               ),
                                             ],
-
                                           ),
-
                                         ),
                                       ]
                                   ),
