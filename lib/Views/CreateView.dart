@@ -44,7 +44,7 @@ class CreateView extends StatelessWidget{
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO( 37, 150, 190, 0.1), // Button color
+                              backgroundColor: Color.fromRGBO(0, 127, 255, 0.1), // Button color
                               foregroundColor: Color.fromRGBO(0, 127, 255, 1),
                               padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15), // Padding
                               textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), // Text style
