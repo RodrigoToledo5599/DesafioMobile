@@ -48,11 +48,8 @@ class _DoneViewState extends State<DoneView>{
   }
 
   updateTaskStatus(String taskId) {
-    // setState(() {
-    //   checkedTasks[taskId] = checkedTasks[taskId]!;
-    //   // checkedTasks[taskId] == true ?  checkedTasks[taskId] = false : checkedTasks[taskId] = 1 ;
-    // });
-    // print("Updated Task $taskId: Done = ${checkedTasks[taskId]}");
+    checkedTasks[taskId] == true ?  checkedTasks[taskId] = false : checkedTasks[taskId] = true ;
+    print("${checkedTasks}");
   }
 
   List<String> getcheckedTaskIds() {
@@ -65,17 +62,17 @@ class _DoneViewState extends State<DoneView>{
 
   void deleteAllSelected(BuildContext context){
     List<String> checkedIds = this.getcheckedTaskIds();
-    for(int i=0; i< checkedIds.length; i++){
-    //   if(checkedTasks[i][] == "1"){
-    //     tvm.deleteATask(checkedTasks[]);
-    //   }
-    }
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => DoneView(),
-    //     )
-    // );
+    this.checkedTasks.forEach((key, value) {
+      if(value == true){
+        tvm.deleteATask(key);
+      }
+    });
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DoneView(),
+        )
+    );
 
   }
 
