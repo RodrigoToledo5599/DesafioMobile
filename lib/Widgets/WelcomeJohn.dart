@@ -18,7 +18,7 @@ class WelcomeJohn extends StatelessWidget{
             children:[
               Row(
                 children: [
-                  SizedBox(width: MediaQuery.sizeOf(context).width * 0.08),
+                  SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
                   Text(
                       "Welcome, ",
                       style: TextStyle(
@@ -41,7 +41,7 @@ class WelcomeJohn extends StatelessWidget{
               if(numberOfTasks >0)
                 Row(
                   children:[
-                    SizedBox(width: MediaQuery.sizeOf(context).width * 0.08),
+                    SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
                     Text(
                         "You've got $numberOfTasks tasks to do.",
                         style: TextStyle(

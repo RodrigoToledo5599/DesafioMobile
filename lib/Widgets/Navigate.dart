@@ -13,8 +13,20 @@ class Navigate extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Container(
-        color:Color.fromRGBO(255, 255, 255, 1),
-        height: MediaQuery.of(context).size.height * 0.1,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+
+        ),
+        // color:Color.fromRGBO(255, 255, 255, 1),
+        height: MediaQuery.of(context).size.height * 0.15,
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

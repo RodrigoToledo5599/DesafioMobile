@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
@@ -6,9 +8,69 @@ import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Widgets/DoneTask.dart';
 
 
-class DoneView extends StatelessWidget{
+
+class DoneView extends StatefulWidget {
   DoneView({Key? key}) : super(key: key);
-  final TaskViewModel tvm = TaskViewModel(); // Instantiate ViewModel
+  _DoneViewState createState() => _DoneViewState();
+}
+
+class _DoneViewState extends State<DoneView>{
+  TaskViewModel tvm = new TaskViewModel();
+  List<Map<String, dynamic>>? tasks = [];
+  Map<String, bool> checkedTasks = {};
+
+  @override
+  void initState() {
+    super.initState();
+    loadTasks();
+  }
+
+  Future<void> loadTasks() async {
+    List<Map<String, dynamic>>? fetchedTasks = await tvm.getTasksDone();
+    setState(() {
+      tasks = fetchedTasks;
+      if(tasks == null || tasks ==[]){
+        return;
+      }
+      List<String> ids = <String>[];
+      for(int i=0; i<=tasks!.length; i++){
+        ids.add(tasks![i]['id']);
+      }
+      checkedTasks = Map<String,bool>.fromIterable(ids,
+        key: (item) => item,
+        value: (item) => false,
+      );
+    });
+    for(int i=0; i<=checkedTasks!.length; i++){
+      print(checkedTasks[i]);
+    }
+  }
+
+  void updateTaskStatus(String taskId, bool? value) {
+    setState(() {
+      checkedTasks[taskId] = value!;
+    });
+
+    // Here you would update the database to persist the change
+    print("Updated Task $taskId: Done = ${checkedTasks[taskId]}");
+  }
+
+
+  void deleteAllSelected(BuildContext context){
+    for(int i=0; i< checkedTasks.length; i++){
+      print(checkedTasks.entries);
+      // if(checkedTasks[i] == "1"){
+      //   tvm.deleteATask(checkedTasks.entries.firstWhere( == id));
+      // }
+    }
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DoneView(),
+        )
+    );
+
+  }
 
   @override
   Widget build (BuildContext context){
@@ -19,11 +81,11 @@ class DoneView extends StatelessWidget{
             bottomNavigationBar: Navigate(),
             body: Center(
               child: Container(
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  height: MediaQuery.of(context).size.height * 0.75,
+                  height: MediaQuery.of(context).size.height * 1,
+                  width: MediaQuery.of(context).size.width * 1,
                   color: Color.fromRGBO(255, 255, 255, 1),
                   child: FutureBuilder<List<Map<String,dynamic>>>(
-                      future: tvm.getTasksNotDone(),
+                      future: this.tvm.getTasksDone(),
                       builder: (context, snapshot){
                         if (snapshot.connectionState == ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator()); // Show loading spinner
@@ -44,19 +106,43 @@ class DoneView extends StatelessWidget{
                                   Column(
                                       children:[
                                         Container(
+                                          width: MediaQuery.of(context).size.width * 0.85,
                                           child:Column(
                                             children:[
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children:[
-                                                  Text("Completed Tasks"),
-                                                  Text("Delete all",
+                                                  Text("Completed Tasks",
                                                     style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontSize:16.0,
-                                                      fontWeight: FontWeight.bold,
+                                                      color: Colors.black,
+                                                      fontFamily: 'Urbanist',
+                                                      fontWeight: FontWeight.w700,
+                                                      fontSize: 20, // Font size
                                                     ),
                                                   ),
+                                                  ElevatedButton(
+                                                    onPressed: (){
+                                                      this.deleteAllSelected(context);
+                                                    },
+                                                    style:ElevatedButton.styleFrom(
+                                                      foregroundColor: Color.fromRGBO(198, 207, 220, 1),
+                                                      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                                                      padding: EdgeInsets.all(15),
+                                                      side: BorderSide.none,
+                                                      elevation: 0,
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(9.0),
+                                                      ),
+                                                    ),
+                                                    child: Text("Delete all",
+                                                      style: TextStyle(
+                                                        fontFamily: 'Urbanist',
+                                                        color: Colors.red,
+                                                        fontSize:18.0,
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  )
                                                 ],
                                               ),
                                               Column(

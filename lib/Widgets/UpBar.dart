@@ -20,7 +20,7 @@ class UpBar extends StatelessWidget implements PreferredSizeWidget{
                 Container(
                   child: Row(
                       children:[
-                        SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
+                        SizedBox(width: MediaQuery.sizeOf(context).width * 0.075),
                         SvgPicture.asset('lib/assets/imgs/checklistImg.svg'),
                         Text(
                           " Taski",
@@ -57,7 +57,7 @@ class UpBar extends StatelessWidget implements PreferredSizeWidget{
                               fit: BoxFit.cover,
                             ),
                           ),
-                          SizedBox(width: MediaQuery.sizeOf(context).width * 0.05),
+                          SizedBox(width: MediaQuery.sizeOf(context).width * 0.075),
                         ]
                     )
                 ),

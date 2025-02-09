@@ -1,4 +1,5 @@
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
+import 'package:desafiomobile/Views/DoneView.dart';
 import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBox.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,11 @@ class _DoneTask extends State<DoneTask>{
         onTap: (){
           openCloseTitle();
       },
-      child : Container(
+      child:
+      Column(
+        children:[
+          SizedBox(height: MediaQuery.of(context).size.height * 0.014),
+          Container(
             width: MediaQuery.of(context).size.width * 0.85,
             color: Color.fromRGBO(245, 247, 249,1),
             child: Row(
@@ -54,31 +59,57 @@ class _DoneTask extends State<DoneTask>{
                     Row(
                         children:[
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.75,
-                            child:
-                            Row(
-                                children:[
-                                  CustomCheckBox(controlVariable: isChecked, onChanged: updateCheckBoxState),
-                                  Flexible( // Allows text to be constrained inside available width
-                                    child: Text(
-                                      "${widget.Name}",
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: maxlinesAllowed,
-                                      softWrap: false,
+                              width: MediaQuery.of(context).size.width * 0.67,
+                              child:
+                              Row(
+                                  children:[
+                                    CustomCheckBox(controlVariable: isChecked, onChanged: updateCheckBoxState),
+                                    Flexible( // Allows text to be constrained inside available width
+                                      child: Text(
+                                        "${widget.Name}",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: maxlinesAllowed,
+                                        softWrap: false,
+
+                                      ),
                                     ),
-                                  ),
-                                ]
-                            )
+                                  ]
+                              )
                           ),
-                          SvgPicture.asset(
+                          ElevatedButton(
+                            onPressed: (){
+                              tvm.deleteATask(widget.id.toString());
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DoneView()
+                                  )
+                              );
+                            },
+                            style:ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromRGBO(245, 247, 249, 1),
+                              padding: EdgeInsets.all(1),
+                              side: BorderSide.none,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(9.0),
+                              ),
+                            ),
+                            child:
+                            SvgPicture.asset(
                               'lib/assets/imgs/TrashIcon.svg',
+                            )
                           )
+
                         ]
                     ),
                   ),
                 ]
             ),
-      )
+          )
+        ]
+
+      ),
     );
   }
 }
