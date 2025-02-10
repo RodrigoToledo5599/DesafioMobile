@@ -35,8 +35,8 @@ class _TodoTask extends State<TodoTask>{
       if(maxlinesAllowed == 1){
         maxlinesAllowed = maxlinesAllowed + 1;
       }
-      else if (maxlinesAllowed == 2){
-        maxlinesAllowed = maxlinesAllowed - 1;
+      else if (maxlinesAllowed == 5){
+        maxlinesAllowed = maxlinesAllowed - 4;
       }
     });
   }
@@ -57,7 +57,11 @@ class _TodoTask extends State<TodoTask>{
           children:[
             SizedBox(height: MediaQuery.of(context).size.height * 0.014),
             Container(
-                color: Color.fromRGBO(245, 247, 249,1),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(245, 247, 249,1),
+                  borderRadius: BorderRadius.circular(8), // Rounded corners
+                ),
+
                 width: MediaQuery.of(context).size.width * 0.85,
                 child:
                 Column(
@@ -72,25 +76,43 @@ class _TodoTask extends State<TodoTask>{
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: maxlinesAllowed,
                                 softWrap: false,
+                                style: TextStyle(
+                                    fontSize: 16
+                                ),
+
                               ),
                             ),
                           ]
                       ),
                       if(isOpen == true)
                         Container(
-                            width: MediaQuery.of(context).size.width * 0.75,
+                            width: MediaQuery.of(context).size.width * 1,
                             child:
                             Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children:[
-                                  SizedBox(width:MediaQuery.of(context).size.width * 0.1),
-                                  Text(
-                                    "${widget.taskModel.Description}",
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: maxlinesAllowed,
+                                  Container(
+                                    width: MediaQuery.of(context).size.width * 0.6,
+                                    child:Row(
+                                      children: [
+                                        Flexible(
+                                            child:
+                                            Text(
+                                              "${widget.taskModel.Description}",
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: maxlinesAllowed,
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(141, 156, 184, 1),
+                                                  fontSize: 14
+                                              ),
+                                            ),
+                                        ),
+
+                                      ],
+                                    ),
                                   ),
-                                  SizedBox(width:MediaQuery.of(context).size.width * 0.1),
+                                  SizedBox(height: MediaQuery.of(context).size.width * 0.04)
                                 ]
                             )
                         )

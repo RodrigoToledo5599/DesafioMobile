@@ -70,15 +70,7 @@ class _TaskSearched extends State<TaskSearched>{
                   )
               )
             else
-              TodoTask(
-                taskModel: widget.taskModel,
-                // taskModel: TaskModel(
-                //     id: 1,
-                //     Name: "aokdkoakoidwko",
-                //     Description: "qwpokdekqpokdepqkjeqpo",
-                //     Done: false,
-                // ),
-              ),
+              TodoTask(taskModel: widget.taskModel),
           ]
       )
     );
