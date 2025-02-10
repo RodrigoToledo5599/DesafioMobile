@@ -19,8 +19,8 @@ class TaskViewModel{
     return result;
   }
 
-  Future<List<Map<String,dynamic>>>? getTask(String name){
-    Future<List<Map<String, dynamic>>>? result =  db.getTask(name);
+  Future<Map<String,dynamic>?> getTask(String name){
+    Future<Map<String, dynamic>?> result =  db.getTask(name);
     return result;
   }
 

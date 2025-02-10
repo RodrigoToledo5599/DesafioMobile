@@ -1,18 +1,13 @@
+import 'package:desafiomobile/Models/TaskModel.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 
 class TaskSearched extends StatefulWidget{
-  final int? id;
-  final String? Name;
-  final String? Description;
-  final int? Done;
+  TaskModel taskModel = new TaskModel();
 
-  const TaskSearched({
+  TaskSearched({
     Key? key,
-    this.id,
-    this.Name,
-    this.Description,
-    this.Done,
+    required this.taskModel,
   }) : super(key: key);
 
   @override
@@ -28,9 +23,9 @@ class _TaskSearched extends State<TaskSearched>{
         width: MediaQuery.of(context).size.width * 0.7,
       child:
       Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children:[
-            if(widget.id == null)
+            if(widget.taskModel.IsEmpty())
               Container(
                   width: MediaQuery.of(context).size.width * 0.7,
                   child: Column(
@@ -54,32 +49,33 @@ class _TaskSearched extends State<TaskSearched>{
               )
             else
               Container(
+                height:MediaQuery.of(context).size.height * 0.2,
                 child:Column(
                   children:[
+                    Expanded(
+                      child: Text(
+                        "${widget.taskModel.Name}",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: false,
+                      ),
+                    ),
                     Row(
                         children:[
-                          Flexible(
-                            child: Text(
-                              "${widget.Name}",
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              softWrap: false,
-                            ),
-                          ),
                           Container(
-                              width: MediaQuery.of(context).size.width * 0.75,
+                              width: MediaQuery.of(context).size.width * 0.7,
                               child:
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children:[
-                                    SizedBox(width:MediaQuery.of(context).size.width * 0.1),
+                                    // SizedBox(width:MediaQuery.of(context).size.width * 0.1),
                                     Text(
-                                      "${widget.Description}",
+                                      "${widget.taskModel.Description}",
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 4,
                                     ),
-                                    SizedBox(width:MediaQuery.of(context).size.width * 0.1),
+                                    // SizedBox(width:MediaQuery.of(context).size.width * 0.1),
                                   ]
                               )
                           )

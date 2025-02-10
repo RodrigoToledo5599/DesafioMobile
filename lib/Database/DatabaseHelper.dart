@@ -42,18 +42,25 @@ class DatabaseHelper{
     }
   }
 
-  Future<List<Map<String,dynamic>>>? getTask(String name) async {
+  Future<Map<String, dynamic>?> getTask(String name) async {
+    name = name.trim();
     try {
       final Database db = await _getDatabase();
-      final Future<List<Map<String, dynamic>>> map = db.query(TASK_TABLE_NAME, where: 'Name LIKE ?', whereArgs: [name]);
-      print(map);
-      return map;
+      if(name == ""){
+        return null;
+      }
+      final List<Map<String, dynamic>> result = await db.query(
+        TASK_TABLE_NAME,
+        where: "$TaskName LIKE '%$name%'",
+        limit: 1,
+      );
+      print("RESULTADO: $result");
+      return result.first;
     } catch (ex) {
       print(ex);
-      return new List<Map<String,dynamic>>.empty();
+      return null;
     }
   }
-
 
   Future createTask(String? task_name,String? task_description, String done) async{
     if(task_name == "" && task_description == ""){

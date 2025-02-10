@@ -1,16 +1,20 @@
+import 'package:desafiomobile/Models/TaskModel.dart';
+import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
 import 'package:desafiomobile/Widgets/TaskSearched.dart';
 import 'package:desafiomobile/Widgets/Navigate.dart';
-import 'package:desafiomobile/Widgets/TaskSearched.dart';
+import 'package:flutter_svg/svg.dart';
 
 
 
 
 
 class SearchView extends StatefulWidget {
-  SearchView({Key? key}) : super(key: key);
+  SearchView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _SearchView createState() => _SearchView();
@@ -18,9 +22,26 @@ class SearchView extends StatefulWidget {
 
 
 class _SearchView extends State<SearchView>{
-  TaskSearched taskSearched = new TaskSearched();
+  TaskModel taskModel = new TaskModel();
+  TaskViewModel tvm = new TaskViewModel();
   final _formKey = GlobalKey<FormState>();
   String? title;
+
+
+  Future<String> searchTask(String task_name) async {
+    Map<String,dynamic>? task = await tvm.getTask(task_name);
+    print(task);
+    if(task != null){
+      setState(() {
+        this.taskModel.getFromMapString(task);
+      });
+      print(this.taskModel);
+    }
+    return "";
+  }
+
+
+
   @override
   Widget build (BuildContext context){
     return MaterialApp(
@@ -35,51 +56,85 @@ class _SearchView extends State<SearchView>{
                   color: Color.fromRGBO(255, 255, 255, 1),
                   child:SingleChildScrollView(
                       child: Form(
-                        key: _formKey,
-                        child: Column(
-                            children:[
-                              Row(
-                                  children:[
-                                    SizedBox(width: MediaQuery.of(context).size.width * 0.08),
-                                    SizedBox(
-                                      child: TextFormField(
-                                        textAlignVertical: TextAlignVertical.bottom,
-                                        onSaved: (val){
-                                          setState((){
-                                            title = val;
-                                          });
-                                        },
-                                        decoration: InputDecoration(
-                                          labelText: 'Task Name',
-                                          hintText: '',
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(12),
-                                            borderSide: BorderSide(
-                                              color: Color.fromRGBO(0, 127, 255, 0.5),
-                                              width: 2.0,
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children:[
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children:[
+                                        ElevatedButton(
+                                            onPressed: ()=> {
+                                              this.searchTask("        Fazer             "),
+                                              if(_formKey.currentState!.validate()){
+                                                _formKey.currentState!.save()
+                                              },
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Color.fromRGBO(245, 247, 249, 1),
+                                              foregroundColor: Color.fromRGBO(0, 127, 255, 1),
+                                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                                              textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                              shape: RoundedRectangleBorder(
+                                                side:BorderSide(
+                                                  color:Color.fromRGBO(0, 127, 255, 1),
+                                                  width: 1.0,
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(20),
+                                                  bottomLeft: Radius.circular(20),
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(12),
-                                            borderSide: BorderSide(
-                                              color: Color.fromRGBO(0, 127, 255, 0.5),
-                                              width: 2.0,
-                                            ),
-                                          ),
+                                            child: SvgPicture.asset("lib/assets/imgs/SearchIconBlue.svg")
                                         ),
-                                      ),
-                                      width: MediaQuery.of(context).size.width * 0.84,
-                                    ),
-                                    SizedBox(width: MediaQuery.of(context).size.width * 0.08)
-                                  ]
-                              ),
-                              TaskSearched(),
-                            ]
-                        ),
-                      )
+                                        SizedBox(
+                                          child: TextFormField(
+                                            textAlignVertical: TextAlignVertical.bottom,
+                                            onSaved: (val){
+                                              setState((){
+                                                title = val;
+                                              });
+                                            },
+                                            decoration: InputDecoration(
+                                              labelText: 'Task Name',
+                                              fillColor: Color.fromRGBO(245, 247, 249, 1),
+                                              filled: true,
+                                              hintText: '',
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(20),
+                                                  bottomRight: Radius.circular(20),
+                                                ),
+                                                borderSide: BorderSide(
+                                                  color: Color.fromRGBO(0, 127, 255, 1),
+                                                  width: 1.0,
+                                                ),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(20),
+                                                  bottomRight: Radius.circular(20),
+                                                ),
+                                                borderSide: BorderSide(
+                                                  color: Color.fromRGBO(0, 127, 255, 0.5),
+                                                  width: 1.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          width: MediaQuery.of(context).size.width * 0.7,
+                                        ),
+                                      ]
+                                  ),
+                                TaskSearched(taskModel: taskModel),
+                              ]
+                          ),
+                        )
+                      ),
                   )
               )
-          ),
-        );
+          );
   }
 }

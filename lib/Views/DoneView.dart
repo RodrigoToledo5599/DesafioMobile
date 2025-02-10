@@ -41,15 +41,10 @@ class _DoneViewState extends State<DoneView>{
       }
       this.checkedTasks = Map<String, bool>.fromIterables(ids, checkedIds);
     });
-    print(tasks);
-    // this.checkedTasks.forEach((key, value) {
-    //   print("$key: $value");
-    // });
   }
 
   updateTaskStatus(String taskId) {
     checkedTasks[taskId] == true ?  checkedTasks[taskId] = false : checkedTasks[taskId] = true ;
-    print("${checkedTasks}");
   }
 
   List<String> getcheckedTaskIds() {

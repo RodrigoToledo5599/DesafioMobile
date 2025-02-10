@@ -68,6 +68,7 @@ flutter:
     - lib/assets/imgs/checklistImg.svg
     - lib/assets/imgs/JohnFace.png
     - lib/assets/imgs/SearchIcon.svg
+    - lib/assets/imgs/SearchIconBlue.svg
     - lib/assets/imgs/TodoIcon.svg
     - lib/assets/imgs/TrashIcon.svg
 
