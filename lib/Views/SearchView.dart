@@ -31,12 +31,18 @@ class _SearchView extends State<SearchView>{
   Future<String> searchTask(String task_name) async {
     Map<String,dynamic>? task = await tvm.getTask(task_name);
     print(task);
+
     if(task != null){
       setState(() {
         this.taskModel.getFromMapString(task);
       });
-      print(this.taskModel);
     }
+
+    setState(() {
+      this.taskModel = new TaskModel();
+    });
+
+    print(this.taskModel);
     return "";
   }
 
@@ -54,19 +60,20 @@ class _SearchView extends State<SearchView>{
                   width: MediaQuery.of(context).size.width * 1,
                   height: MediaQuery.of(context).size.height * 1,
                   color: Color.fromRGBO(255, 255, 255, 1),
+                  // color: Color.fromRGBO(0, 0, 0, 1),
                   child:SingleChildScrollView(
                       child: Form(
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children:[
                                   Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children:[
                                         ElevatedButton(
                                             onPressed: ()=> {
-                                              this.searchTask("        Fazer             "),
+                                              this.searchTask(""),
                                               if(_formKey.currentState!.validate()){
                                                 _formKey.currentState!.save()
                                               },
@@ -128,6 +135,7 @@ class _SearchView extends State<SearchView>{
                                         ),
                                       ]
                                   ),
+                                SizedBox(height: MediaQuery.of(context).size.height * 0.15),
                                 TaskSearched(taskModel: taskModel),
                               ]
                           ),

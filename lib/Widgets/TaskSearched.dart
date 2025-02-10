@@ -1,4 +1,5 @@
 import 'package:desafiomobile/Models/TaskModel.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -21,6 +22,7 @@ class _TaskSearched extends State<TaskSearched>{
     return
       Container(
         width: MediaQuery.of(context).size.width * 0.7,
+        height:MediaQuery.of(context).size.height * 0.4,
       child:
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,8 +51,10 @@ class _TaskSearched extends State<TaskSearched>{
               )
             else
               Container(
-                height:MediaQuery.of(context).size.height * 0.2,
+                height:MediaQuery.of(context).size.height * 0.4,
+                color: Colors.blue,
                 child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children:[
                     Expanded(
                       child: Text(

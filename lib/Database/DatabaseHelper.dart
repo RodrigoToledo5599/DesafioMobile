@@ -47,6 +47,7 @@ class DatabaseHelper{
     try {
       final Database db = await _getDatabase();
       if(name == ""){
+        print("vai retornar null");
         return null;
       }
       final List<Map<String, dynamic>> result = await db.query(
