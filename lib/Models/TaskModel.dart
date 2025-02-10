@@ -2,13 +2,13 @@ class TaskModel {
   int? id;
   String? Name;
   String? Description;
-  bool Done;
+  bool? Done;
 
   TaskModel({
     this.id,
     this.Name,
     this.Description,
-    this.Done = false,
+    this.Done,
   });
   Map<String, dynamic> toJson() {
     return {
@@ -24,15 +24,6 @@ class TaskModel {
     }
     return false;
   }
-
-  // factory TaskModel.fromJson(Map<String, dynamic> json) {
-  //   return TaskModel(
-  //     id: json['id'],
-  //     Name: json['Name'],
-  //     Description: json['Description'],
-  //     Done: json['Done'] ?? false,
-  //   );
-  // }
 
   TaskModel getFromMapString(Map<String, dynamic> json){
     this.id =  json['id'];

@@ -1,27 +1,39 @@
 import 'package:desafiomobile/Models/TaskModel.dart';
+import 'package:desafiomobile/Widgets/TodoTask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 
 class TaskSearched extends StatefulWidget{
-  TaskModel taskModel = new TaskModel();
-
+  TaskModel taskModel;
   TaskSearched({
     Key? key,
     required this.taskModel,
   }) : super(key: key);
-
   _TaskSearched createState() => _TaskSearched();
-
 }
 
 class _TaskSearched extends State<TaskSearched>{
+  bool isChecked = false;
+  bool isOpen = false;
+
+  void updateCheckBoxState(bool value){
+    setState(() {
+      isChecked = value;
+    });
+  }
+
+  void openAndCloseText(){
+    setState((){
+      isOpen = !isOpen;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    // print(widget.taskModel);
-    print("zzzzzzzzzz");
+    print(widget.taskModel);
+    // print("zzzzzzzzzz");
   }
 
 
@@ -58,43 +70,14 @@ class _TaskSearched extends State<TaskSearched>{
                   )
               )
             else
-              Container(
-                height:MediaQuery.of(context).size.height * 0.4,
-                color: Colors.blue,
-                child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children:[
-                    Expanded(
-                      child: Text(
-                        "${widget.taskModel.Name}",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: false,
-                      ),
-                    ),
-                    Row(
-                        children:[
-                          Container(
-                              width: MediaQuery.of(context).size.width * 0.7,
-                              child:
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children:[
-                                    // SizedBox(width:MediaQuery.of(context).size.width * 0.1),
-                                    Text(
-                                      "${widget.taskModel.Description}",
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 4,
-                                    ),
-                                    // SizedBox(width:MediaQuery.of(context).size.width * 0.1),
-                                  ]
-                              )
-                          )
-                        ]
-                    ),
-                  ]
-                )
+              TodoTask(
+                taskModel: widget.taskModel,
+                // taskModel: TaskModel(
+                //     id: 1,
+                //     Name: "aokdkoakoidwko",
+                //     Description: "qwpokdekqpokdepqkjeqpo",
+                //     Done: false,
+                // ),
               ),
           ]
       )

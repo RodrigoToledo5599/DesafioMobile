@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 
 class TodoTask extends StatefulWidget {
   TaskModel taskModel = new TaskModel();
-
-
   TodoTask({
     Key? key,
     required this.taskModel,

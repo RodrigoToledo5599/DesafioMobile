@@ -29,19 +29,20 @@ class _SearchView extends State<SearchView>{
   String? title;
 
 
-  Future<String> searchTask(String task_name) async {
+  Future<bool> searchTask(String task_name) async {
     TaskModel? task = await tvm.getTask(task_name);
     if(task != null){
       setState(() {
         this.taskModel = task;
       });
-      print(this.taskModel);
+      print("${this.taskModel} \n\n\n");
+      return true;
     }
     setState(() {
       this.taskModel = new TaskModel();
     });
-    // print(this.taskModel);
-    return "";
+    print(this.taskModel);
+    return false;
   }
 
 

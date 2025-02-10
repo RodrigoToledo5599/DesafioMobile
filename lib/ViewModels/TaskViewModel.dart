@@ -7,11 +7,6 @@ class TaskViewModel{
 
   DatabaseHelper db = new DatabaseHelper();
 
-  // Future<List<Map<String,dynamic>>>? getTasksDone(){
-  //   Future<List<Map<String, dynamic>>>? result =  db.getTasksDone();
-  //   return result;
-  // }
-
   Future<List<TaskModel>>? getTasksDone() async {
     List<Map<String, dynamic>>? result = await db.getTasksDone();
     List<TaskModel>? tasks = [];
@@ -29,18 +24,17 @@ class TaskViewModel{
   }
 
 
-  Future<List<TaskModel>>? getTasksNotDone() async {
+  Future<List<TaskModel>?> getTasksNotDone() async {
     List<Map<String, dynamic>>? result = await db.getTasksNotDone();
     List<TaskModel>? tasks = [];
 
     if(result == null || result == []){
-      return [];
+      return null;
     }
     for (var item in result!) {
       TaskModel taskmodel = new TaskModel();
       taskmodel.getFromMapString(item);
       tasks!.add(taskmodel);
-      print(item);
     }
     return Future.value(tasks);
   }
