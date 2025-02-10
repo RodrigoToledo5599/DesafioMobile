@@ -6,11 +6,32 @@ import 'package:desafiomobile/Widgets/UpBar.dart';
 import 'package:desafiomobile/Widgets/TodoTask.dart';
 import 'package:desafiomobile/Widgets/CreateTask.dart';
 
-class CreatingTaskView extends StatelessWidget {
+class CreatingTaskView extends StatefulWidget {
   CreatingTaskView({Key? key}) : super(key: key);
+  _CreatingTaskViewState createState() => _CreatingTaskViewState();
+}
+class _CreatingTaskViewState extends State<CreatingTaskView>{
 
+  List<TaskModel>? tasks = [];
   final TaskViewModel tvm = TaskViewModel();
   TaskModel taskModel = new TaskModel();
+
+  @override
+  void initState() {
+    super.initState();
+    loadTasks();
+  }
+
+  Future<void> loadTasks() async {
+    List<TaskModel>? fetchedTasks = await tvm.getTasksNotDone();
+    setState(() {
+      tasks = fetchedTasks;
+      if(tasks!.isEmpty){
+        return;
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +45,7 @@ class CreatingTaskView extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.8,
             color: Colors.white,
             child: FutureBuilder<List<TaskModel>>(
-              future: tvm.getTasksDone(),
+              future: Future.value(this.tasks),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
@@ -50,7 +71,7 @@ class CreatingTaskView extends StatelessWidget {
                       Column(
                         children: tasks.map((task) {
                           return TodoTask(
-                              taskModel: this.taskModel);
+                              taskModel: task);
                         }).toList(),
                       ),
                     ],

@@ -33,7 +33,7 @@ class _CreateTask extends State<CreateTask>{
       Container(
         margin: EdgeInsets.only(top: 9),
         width: MediaQuery.of(context).size.width * 1,
-        height: MediaQuery.of(context).size.height * 0.45,
+        height: MediaQuery.of(context).size.height * 0.60,
         // color: Color.fromRGBO(255, 255, 255, 1),
         decoration: BoxDecoration(
           color: Colors.white,
