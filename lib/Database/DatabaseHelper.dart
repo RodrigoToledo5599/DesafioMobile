@@ -52,7 +52,6 @@ class DatabaseHelper{
     try {
       final Database db = await _getDatabase();
       if(name == ""){
-        print("vai retornar null");
         return null;
       }
       final List<Map<String, dynamic>> result = await db.query(
@@ -60,7 +59,6 @@ class DatabaseHelper{
         where: "$TaskName LIKE '%$name%'",
         limit: 1,
       );
-      print("RESULTADO: $result");
       return result.first;
     } catch (ex) {
       print(ex);

@@ -30,20 +30,17 @@ class _SearchView extends State<SearchView>{
 
 
   Future<String> searchTask(String task_name) async {
-    Map<String,dynamic>? task = await tvm.getTask(task_name);
-    print(task);
-
+    TaskModel? task = await tvm.getTask(task_name);
     if(task != null){
       setState(() {
-        this.taskModel.getFromMapString(task);
+        this.taskModel = task;
       });
+      print(this.taskModel);
     }
-
     setState(() {
       this.taskModel = new TaskModel();
     });
-
-    print(this.taskModel);
+    // print(this.taskModel);
     return "";
   }
 

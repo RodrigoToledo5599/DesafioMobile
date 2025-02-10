@@ -45,9 +45,11 @@ class TaskViewModel{
     return Future.value(tasks);
   }
 
-  Future<Map<String,dynamic>?> getTask(String name){
-    Future<Map<String, dynamic>?> result =  db.getTask(name);
-    return result;
+  Future<TaskModel?> getTask(String name) async {
+    Map<String, dynamic>? query = await db.getTask(name);
+    TaskModel result= new TaskModel();
+    result.getFromMapString(query!);
+    return Future.value(result);
   }
 
   void createTask(String? title, String? description, bool done){

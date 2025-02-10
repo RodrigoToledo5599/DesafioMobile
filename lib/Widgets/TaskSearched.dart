@@ -11,12 +11,20 @@ class TaskSearched extends StatefulWidget{
     required this.taskModel,
   }) : super(key: key);
 
-  @override
   _TaskSearched createState() => _TaskSearched();
 
 }
 
 class _TaskSearched extends State<TaskSearched>{
+
+  @override
+  void initState() {
+    super.initState();
+    // print(widget.taskModel);
+    print("zzzzzzzzzz");
+  }
+
+
   @override
   Widget build (BuildContext context){
     return
@@ -27,7 +35,7 @@ class _TaskSearched extends State<TaskSearched>{
       Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children:[
-            if(widget.taskModel.IsEmpty())
+            if(widget.taskModel.id == null)
               Container(
                   width: MediaQuery.of(context).size.width * 0.7,
                   child: Column(
