@@ -1,5 +1,5 @@
 import 'dart:ffi';
-
+import 'package:desafiomobile/Models/TaskModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
@@ -17,7 +17,8 @@ class DoneView extends StatefulWidget {
 class _DoneViewState extends State<DoneView>{
 
   TaskViewModel tvm = new TaskViewModel();
-  List<Map<String, dynamic>>? tasks = [];
+  TaskModel taskModel = new TaskModel();
+  List<TaskModel>? tasks = [];
   Map<String, bool> checkedTasks = {};
 
   @override
@@ -27,7 +28,7 @@ class _DoneViewState extends State<DoneView>{
   }
 
   Future<void> loadTasks() async {
-    List<Map<String, dynamic>>? fetchedTasks = await tvm.getTasksDone();
+    List<TaskModel>? fetchedTasks = await tvm.getTasksDone();
     setState(() {
       tasks = fetchedTasks;
       if(tasks!.isEmpty){
@@ -35,8 +36,9 @@ class _DoneViewState extends State<DoneView>{
       }
       List<String> ids = <String>[];
       List<bool> checkedIds = <bool>[];
-      for(int i=0; i < tasks!.length; i++){
-        ids.add(tasks![i]['id'].toString());
+
+      for(var item in tasks!){
+        ids.add(item.id.toString());
         checkedIds.add(false);
       }
       this.checkedTasks = Map<String, bool>.fromIterables(ids, checkedIds);
@@ -83,8 +85,8 @@ class _DoneViewState extends State<DoneView>{
                   height: MediaQuery.of(context).size.height * 1,
                   width: MediaQuery.of(context).size.width * 1,
                   color: Color.fromRGBO(255, 255, 255, 1),
-                  child: FutureBuilder<List<Map<String,dynamic>>?>(
-                      future: this.tvm.getTasksDone(),
+                  child: FutureBuilder<List<TaskModel>?>(
+                      future: Future.value(tasks),
                       // future: this.tasks,
                       builder: (context, snapshot){
                         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -96,7 +98,7 @@ class _DoneViewState extends State<DoneView>{
                         if (!snapshot.hasData || snapshot.data!.isEmpty) {
                           return Center(child: Text("No tasks available"));
                         }
-                        List<Map<String, dynamic>> tasks = snapshot.data!;
+                        List<TaskModel> tasks = snapshot.data!;
 
                         return SingleChildScrollView(
                             child: Column(
@@ -148,11 +150,8 @@ class _DoneViewState extends State<DoneView>{
                                               Column(
                                                 children: tasks.map((task) {
                                                   return DoneTask(
-                                                      id: task["id"] ?? "N/A",
-                                                      Name: task["Name"] ?? "Untitled Task",
-                                                      Description: task["Description"] ?? "No description",
-                                                      Done: task["Done"],
-                                                      metodo: (taskId) => updateTaskStatus(task['id'].toString()),
+                                                      taskModel: task,
+                                                      metodo: (taskId) => updateTaskStatus(task.id.toString()),
                                                   );
                                                 }).toList(),
                                               ),

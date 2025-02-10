@@ -1,14 +1,39 @@
+import 'package:desafiomobile/Models/TaskModel.dart';
 import 'package:flutter/material.dart';
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Widgets/UpBar.dart';
 import 'package:desafiomobile/Widgets/Navigate.dart';
 import 'package:desafiomobile/Widgets/TodoTask.dart';
 import 'package:desafiomobile/Widgets/WelcomeJohn.dart';
-import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBox.dart';
 
-class TodoView extends StatelessWidget {
+
+class TodoView extends StatefulWidget {
   TodoView({Key? key}) : super(key: key);
-  final TaskViewModel tvm = TaskViewModel(); // Instantiate ViewModel
+  _TodoViewState createState() => _TodoViewState();
+}
+
+class _TodoViewState extends State<TodoView>{
+
+  final TaskViewModel tvm = TaskViewModel();
+  final TaskModel taskModel = TaskModel();
+  List<TaskModel>? tasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadTasks();
+  }
+
+  Future<void> loadTasks() async {
+    List<TaskModel>? fetchedTasks = await tvm.getTasksNotDone();
+    setState(() {
+      tasks = fetchedTasks;
+      if(tasks!.isEmpty){
+        return;
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +46,8 @@ class TodoView extends StatelessWidget {
           child: Container(
             height: MediaQuery.of(context).size.height * 1,
             color: Colors.white,
-            child: FutureBuilder<List<Map<String, dynamic>>>(
-              future: tvm.getTasksNotDone(), // Fetch tasks asynchronously
+            child: FutureBuilder<List<TaskModel>?>(
+              future: Future.value(this.tasks), // Fetch tasks asynchronously
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator()); // Show loading spinner
@@ -33,9 +58,7 @@ class TodoView extends StatelessWidget {
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return Center(child: Text("No tasks available"));
                 }
-
-                List<Map<String, dynamic>> tasks = snapshot.data!;
-
+                List<TaskModel> tasks = snapshot.data!;
                 return SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,10 +71,7 @@ class TodoView extends StatelessWidget {
                       Column(
                         children: tasks.map((task) {
                           return TodoTask(
-                              id: task["id"] ?? "N/A",
-                              Name: task["Name"] ?? "Untitled Task",
-                              Description: task["Description"] ?? "No description",
-                              Done: task["Done"]
+                            taskModel: task,
                           );
                         }).toList(),
                       ),

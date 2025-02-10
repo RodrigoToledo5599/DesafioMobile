@@ -34,16 +34,21 @@ class TaskModel {
   //   );
   // }
 
-  void getFromMapString(Map<String, dynamic> json){
-    print(" $json AAAAAAAAAAAAA");
+  TaskModel getFromMapString(Map<String, dynamic> json){
     this.id =  json['id'];
     this.Name = json['Name'];
     this.Description = json['Description'];
-    this.Done = json['Done'];
+    this.Done = json['Done'] == 1 ? true : false;
+    return TaskModel(
+      id: this.id,
+      Name: this.Name,
+      Description: this.Description,
+      Done: this.Done
+    );
   }
 
   @override
   String toString() {
-    return 'TaskModel(id: $id, title: $Name, isCompleted: $Done)';
+    return 'TaskModel(id: $id, Name: $Name, Description: $Description, Done: $Done)';
   }
 }

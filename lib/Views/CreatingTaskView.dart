@@ -1,3 +1,4 @@
+import 'package:desafiomobile/Models/TaskModel.dart';
 import 'package:desafiomobile/Widgets/WelcomeJohn.dart';
 import 'package:flutter/material.dart';
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
@@ -8,7 +9,8 @@ import 'package:desafiomobile/Widgets/CreateTask.dart';
 class CreatingTaskView extends StatelessWidget {
   CreatingTaskView({Key? key}) : super(key: key);
 
-  final TaskViewModel tvm = TaskViewModel(); // Instantiate ViewModel
+  final TaskViewModel tvm = TaskViewModel();
+  TaskModel taskModel = new TaskModel();
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,11 @@ class CreatingTaskView extends StatelessWidget {
           child: Container(
             height: MediaQuery.of(context).size.height * 0.8,
             color: Colors.white,
-            child: FutureBuilder<List<Map<String, dynamic>>>(
-              future: tvm.getTasksDone(), // Fetch tasks asynchronously
+            child: FutureBuilder<List<TaskModel>>(
+              future: tvm.getTasksDone(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator()); // Show loading spinner
+                  return Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.hasError) {
                   return Center(child: Text("Error loading tasks"));
@@ -33,7 +35,7 @@ class CreatingTaskView extends StatelessWidget {
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return Center(child: Text("No tasks available"));
                 }
-                List<Map<String, dynamic>> tasks = snapshot.data!;
+                List<TaskModel> tasks = snapshot.data!;
 
                 return SingleChildScrollView(
                   child: Column(
@@ -48,11 +50,7 @@ class CreatingTaskView extends StatelessWidget {
                       Column(
                         children: tasks.map((task) {
                           return TodoTask(
-                              id: task["id"] ?? "N/A",
-                              Name: task["Name"] ?? "Untitled Task",
-                              Description: task["Description"] ?? "No description",
-                              Done: task["Done"]
-                          );
+                              taskModel: this.taskModel);
                         }).toList(),
                       ),
                     ],

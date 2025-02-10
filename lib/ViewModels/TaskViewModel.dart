@@ -3,20 +3,46 @@ import 'package:desafiomobile/Database/DatabaseHelper.dart';
 
 
 
-
-
 class TaskViewModel{
 
   DatabaseHelper db = new DatabaseHelper();
 
-  Future<List<Map<String,dynamic>>>? getTasksDone(){
-    Future<List<Map<String, dynamic>>>? result =  db.getTasksDone();
-    return result;
+  // Future<List<Map<String,dynamic>>>? getTasksDone(){
+  //   Future<List<Map<String, dynamic>>>? result =  db.getTasksDone();
+  //   return result;
+  // }
+
+  Future<List<TaskModel>>? getTasksDone() async {
+    List<Map<String, dynamic>>? result = await db.getTasksDone();
+    List<TaskModel>? tasks = [];
+
+    if(result == null || result == []){
+      return [];
+    }
+    for (var item in result!) {
+      TaskModel taskmodel = new TaskModel();
+      taskmodel.getFromMapString(item);
+      tasks!.add(taskmodel);
+      print(item);
+    }
+    return Future.value(tasks);
   }
 
-  Future<List<Map<String,dynamic>>>? getTasksNotDone(){
-    Future<List<Map<String, dynamic>>>? result =  db.getTasksNotDone();
-    return result;
+
+  Future<List<TaskModel>>? getTasksNotDone() async {
+    List<Map<String, dynamic>>? result = await db.getTasksNotDone();
+    List<TaskModel>? tasks = [];
+
+    if(result == null || result == []){
+      return [];
+    }
+    for (var item in result!) {
+      TaskModel taskmodel = new TaskModel();
+      taskmodel.getFromMapString(item);
+      tasks!.add(taskmodel);
+      print(item);
+    }
+    return Future.value(tasks);
   }
 
   Future<Map<String,dynamic>?> getTask(String name){

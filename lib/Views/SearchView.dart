@@ -24,6 +24,7 @@ class SearchView extends StatefulWidget {
 class _SearchView extends State<SearchView>{
   TaskModel taskModel = new TaskModel();
   TaskViewModel tvm = new TaskViewModel();
+  TextEditingController _taskController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String? title;
 
@@ -68,12 +69,13 @@ class _SearchView extends State<SearchView>{
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children:[
+                                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                                   Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children:[
                                         ElevatedButton(
                                             onPressed: ()=> {
-                                              this.searchTask(""),
+                                              this.searchTask(_taskController.text),
                                               if(_formKey.currentState!.validate()){
                                                 _formKey.currentState!.save()
                                               },
@@ -98,6 +100,7 @@ class _SearchView extends State<SearchView>{
                                         ),
                                         SizedBox(
                                           child: TextFormField(
+                                            controller: _taskController,
                                             textAlignVertical: TextAlignVertical.bottom,
                                             onSaved: (val){
                                               setState((){

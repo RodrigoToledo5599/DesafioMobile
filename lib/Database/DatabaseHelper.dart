@@ -34,8 +34,13 @@ class DatabaseHelper{
   Future<List<Map<String,dynamic>>>? getTasksNotDone() async {
     try {
       final Database db = await _getDatabase();
-      final Future<List<Map<String, dynamic>>> maps = db.query(TASK_TABLE_NAME,where: "Done = 0");
-      return maps;
+      final List<Map<String, dynamic>> maps = await db.query(TASK_TABLE_NAME,where: "Done = 0");
+      // if (maps.isNotEmpty) {
+      //   for (var map in maps) {
+      //     print(map);  // This will print each map from the list
+      //   }
+      // }
+      return Future.value(maps);
     } catch (ex) {
       print(ex);
       return new List<Map<String,dynamic>>.empty();

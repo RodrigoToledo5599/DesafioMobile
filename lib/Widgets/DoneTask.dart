@@ -2,22 +2,17 @@ import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Views/DoneView.dart';
 import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBoxDone.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:desafiomobile/Models/TaskModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DoneTask extends StatefulWidget {
-  final int id;
-  final String Name;
-  final String Description;
-  final int Done;
+  TaskModel taskModel = new TaskModel();
   final Function(String) metodo;
 
-  const DoneTask({
+  DoneTask({
     Key? key,
-    required this.id,
-    required this.Name,
-    required this.Description,
-    required this.Done,
+    required this.taskModel,
     required this.metodo,
   }) : super(key: key);
 
@@ -72,14 +67,14 @@ class _DoneTask extends State<DoneTask>{
                               Row(
                                   children:[
                                     CustomCheckBoxDone(
-                                        Id: widget.id.toString(),
+                                        Id: widget.taskModel.id.toString(),
                                         controlVariable: isChecked,
                                         onChanged: updateCheckBoxState,
                                         updatecheckedId: (id) => widget.metodo(id),
                                     ),
                                     Flexible(
                                       child: Text(
-                                        "${widget.Name}",
+                                        "${widget.taskModel.Name}",
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: maxlinesAllowed,
                                         softWrap: false,
@@ -90,7 +85,7 @@ class _DoneTask extends State<DoneTask>{
                           ),
                           ElevatedButton(
                             onPressed: (){
-                              tvm.deleteATask(widget.id.toString());
+                              tvm.deleteATask(widget.taskModel.id.toString());
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

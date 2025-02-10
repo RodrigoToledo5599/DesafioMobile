@@ -1,31 +1,31 @@
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBox.dart';
+import 'package:desafiomobile/Models/TaskModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
 
 class TodoTask extends StatefulWidget {
-  final int id;
-  final String Name;
-  final String Description;
-  final int Done;
+  TaskModel taskModel = new TaskModel();
 
-  const TodoTask({Key? key, required this.id, required this.Name, required this.Description, required this.Done}) : super(key: key);
+
+  TodoTask({
+    Key? key,
+    required this.taskModel,
+  }) : super(key: key);
 
   @override
   _TodoTask createState() => _TodoTask();
 }
 
 class _TodoTask extends State<TodoTask>{
-
   bool isChecked = false;
   bool isOpen = false;
   int maxlinesAllowed = 1;
   TaskViewModel tvm = new TaskViewModel();
 
-
-  void updateCheckBoxState(bool value) {
+  void updateCheckBoxState(bool value){
     setState(() {
       isChecked = value;
     });
@@ -33,6 +33,7 @@ class _TodoTask extends State<TodoTask>{
 
   void openCloseTitle(){
     setState(() {
+      print(widget.taskModel.Name);
       if(maxlinesAllowed == 1){
         maxlinesAllowed = maxlinesAllowed + 1;
       }
@@ -69,7 +70,7 @@ class _TodoTask extends State<TodoTask>{
                             CustomCheckBox(controlVariable: isChecked, onChanged: updateCheckBoxState),
                             Flexible(
                               child: Text(
-                                "${widget.Name}",
+                                "${widget.taskModel.Name}",
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: maxlinesAllowed,
                                 softWrap: false,
@@ -87,7 +88,7 @@ class _TodoTask extends State<TodoTask>{
                                 children:[
                                   SizedBox(width:MediaQuery.of(context).size.width * 0.1),
                                   Text(
-                                    "${widget.Description}",
+                                    "${widget.taskModel.Description}",
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: maxlinesAllowed,
                                   ),
