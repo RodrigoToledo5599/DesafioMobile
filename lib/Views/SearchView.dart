@@ -12,10 +12,7 @@ import 'package:flutter_svg/svg.dart';
 
 
 class SearchView extends StatefulWidget {
-  SearchView({
-    Key? key,
-  }) : super(key: key);
-
+  SearchView({Key? key}) : super(key: key);
   @override
   _SearchView createState() => _SearchView();
 }
@@ -59,7 +56,6 @@ class _SearchView extends State<SearchView>{
                   width: MediaQuery.of(context).size.width * 1,
                   height: MediaQuery.of(context).size.height * 1,
                   color: Color.fromRGBO(255, 255, 255, 1),
-                  // color: Color.fromRGBO(0, 0, 0, 1),
                   child:SingleChildScrollView(
                       child: Form(
                           key: _formKey,
@@ -68,74 +64,83 @@ class _SearchView extends State<SearchView>{
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children:[
                                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children:[
-                                        ElevatedButton(
-                                            onPressed: ()=> {
-                                              this.searchTask(_taskController.text),
-                                              if(_formKey.currentState!.validate()){
-                                                _formKey.currentState!.save()
-                                              },
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Color.fromRGBO(245, 247, 249, 1),
-                                              foregroundColor: Color.fromRGBO(0, 127, 255, 1),
-                                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                                              textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                              shape: RoundedRectangleBorder(
-                                                side:BorderSide(
-                                                  color:Color.fromRGBO(0, 127, 255, 1),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(20),
-                                                  bottomLeft: Radius.circular(20),
-                                                ),
-                                              ),
-                                            ),
-                                            child: SvgPicture.asset("lib/assets/imgs/SearchIconBlue.svg")
+                                  Positioned(
+                                      child:
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Color.fromRGBO(245, 247, 249,1),
+                                          borderRadius: BorderRadius.circular(20), // Rounded corners
                                         ),
-                                        SizedBox(
-                                          child: TextFormField(
-                                            controller: _taskController,
-                                            textAlignVertical: TextAlignVertical.bottom,
-                                            onSaved: (val){
-                                              setState((){
-                                                title = val;
-                                              });
-                                            },
-                                            decoration: InputDecoration(
-                                              labelText: 'Task Name',
-                                              fillColor: Color.fromRGBO(245, 247, 249, 1),
-                                              filled: true,
-                                              hintText: '',
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(20),
-                                                  bottomRight: Radius.circular(20),
-                                                ),
-                                                borderSide: BorderSide(
-                                                  color: Color.fromRGBO(0, 127, 255, 1),
-                                                  width: 1.0,
+                                        width: MediaQuery.of(context).size.width * 0.9,
+                                        child:
+                                        Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children:[
+                                              Container(
+                                                width: MediaQuery.of(context).size.width * 0.2,
+                                                child:
+                                                ElevatedButton(
+                                                    onPressed: ()=> {
+                                                      this.searchTask(_taskController.text),
+                                                      if(_formKey.currentState!.validate()){
+                                                        _formKey.currentState!.save()
+                                                      },
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                      backgroundColor: Color.fromRGBO(245, 247, 249, 1),
+                                                      side: BorderSide.none,
+                                                      shadowColor: Colors.transparent,
+                                                      // foregroundColor: Color.fromRGBO(0, 127, 255, 1),
+                                                      padding: EdgeInsets.symmetric(horizontal: 9, vertical: 15),
+                                                      textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                                      shape: RoundedRectangleBorder(
+                                                        side:BorderSide(
+                                                          color:Color.fromRGBO(245, 247, 249, 1),
+                                                          width: 0.0,
+                                                        ),
+                                                        // borderRadius: BorderRadius.only(
+                                                        // topLeft: Radius.circular(20),
+                                                        // bottomLeft: Radius.circular(20),
+                                                        // ),
+                                                      ),
+                                                    ),
+                                                    child: SvgPicture.asset("lib/assets/imgs/SearchIconBlue.svg")
                                                 ),
                                               ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(20),
-                                                  bottomRight: Radius.circular(20),
+                                              SizedBox(
+                                                child: TextFormField(
+                                                  controller: _taskController,
+                                                  textAlignVertical: TextAlignVertical.bottom,
+                                                  onSaved: (val){
+                                                    setState((){
+                                                      title = val;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    fillColor: Color.fromRGBO(245, 247, 249, 1),
+                                                    filled: true,
+                                                    hintText: '',
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Color.fromRGBO(245, 247, 249, 1),
+                                                        width: 2.0,
+                                                      ),
+                                                    ),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Color.fromRGBO(245, 247, 249, 1),
+                                                        width: 0.0,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                                borderSide: BorderSide(
-                                                  color: Color.fromRGBO(0, 127, 255, 0.5),
-                                                  width: 1.0,
-                                                ),
+                                                width: MediaQuery.of(context).size.width * 0.7,
                                               ),
-                                            ),
-                                          ),
-                                          width: MediaQuery.of(context).size.width * 0.7,
+                                            ]
                                         ),
-                                      ]
+                                      ),
                                   ),
+
                                 SizedBox(height: MediaQuery.of(context).size.height * 0.15),
                                 TaskSearched(taskModel: taskModel),
                               ]
