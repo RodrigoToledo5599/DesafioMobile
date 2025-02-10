@@ -44,17 +44,17 @@ class CreateView extends StatelessWidget{
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(0, 127, 255, 0.1), // Button color
+                              backgroundColor: Color.fromRGBO(255, 255, 255, 0.1),
                               foregroundColor: Color.fromRGBO(0, 127, 255, 1),
-                              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15), // Padding
-                              textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), // Text style
+                              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                              textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10), // Rounded corners
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                             child:
                             Container(
-                                width: 120,
+                                width: 135,
                                 child:
                                 Row(
                                     children:[
