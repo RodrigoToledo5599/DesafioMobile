@@ -30,6 +30,7 @@ class TaskModel {
     this.Name = json['Name'];
     this.Description = json['Description'];
     this.Done = json['Done'] == 1 ? true : false;
+
     return TaskModel(
       id: this.id,
       Name: this.Name,

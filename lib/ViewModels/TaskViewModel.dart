@@ -24,12 +24,12 @@ class TaskViewModel{
   }
 
 
-  Future<List<TaskModel>?> getTasksNotDone() async {
+  Future<List<TaskModel>>? getTasksNotDone() async {
     List<Map<String, dynamic>>? result = await db.getTasksNotDone();
     List<TaskModel>? tasks = [];
 
     if(result == null || result == []){
-      return null;
+      return [];
     }
     for (var item in result!) {
       TaskModel taskmodel = new TaskModel();

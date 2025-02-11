@@ -7,7 +7,7 @@ import 'package:path/path.dart';
 
 class DatabaseHelper{
 
-  Future<Database> _getDatabase() async{
+  Future<Database> getDatabase() async{
     return openDatabase(
       join(await getDatabasesPath(),DB_NAME),
       onCreate: (db, version) async {
@@ -22,7 +22,7 @@ class DatabaseHelper{
 
   Future<List<Map<String,dynamic>>>? getTasksDone() async {
     try {
-      final Database db = await _getDatabase();
+      final Database db = await getDatabase();
       final Future<List<Map<String, dynamic>>> maps = db.query(TASK_TABLE_NAME,where: "Done = 1");
       return maps;
     } catch (ex) {
@@ -33,7 +33,7 @@ class DatabaseHelper{
 
   Future<List<Map<String,dynamic>>>? getTasksNotDone() async {
     try {
-      final Database db = await _getDatabase();
+      final Database db = await getDatabase();
       final List<Map<String, dynamic>> maps = await db.query(TASK_TABLE_NAME,where: "Done = 0");
       // if (maps.isNotEmpty) {
       //   for (var map in maps) {
@@ -50,7 +50,7 @@ class DatabaseHelper{
   Future<Map<String, dynamic>?> getTask(String name) async {
     name = name.trim();
     try {
-      final Database db = await _getDatabase();
+      final Database db = await getDatabase();
       if(name == ""){
         return null;
       }
@@ -72,7 +72,7 @@ class DatabaseHelper{
     }
     else{
       try{
-        final Database db = await _getDatabase();
+        final Database db = await getDatabase();
         await db.rawInsert('''
           INSERT INTO $TASK_TABLE_NAME($TaskName, $TaskDescription, $TaskDoneOrNot) VALUES('${task_name}','${task_description}','$done')
         ''');
@@ -88,7 +88,7 @@ class DatabaseHelper{
     }
     else{
       try{
-        final Database db = await _getDatabase();
+        final Database db = await getDatabase();
         await db.rawInsert('''
           DELETE FROM $TASK_TABLE_NAME WHERE id = $id
         ''');
@@ -99,7 +99,7 @@ class DatabaseHelper{
   }
 
   Future<void> TaskIsDone(String id) async{
-    final Database db = await _getDatabase();
+    final Database db = await getDatabase();
     await db.rawUpdate(
         'UPDATE $TASK_TABLE_NAME SET $TaskDoneOrNot = 1 WHERE id = $id',
     );
