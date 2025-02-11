@@ -98,5 +98,11 @@ class DatabaseHelper{
     }
   }
 
+  Future<void> TaskIsDone(String id) async{
+    final Database db = await _getDatabase();
+    await db.rawUpdate(
+        'UPDATE $TASK_TABLE_NAME SET $TaskDoneOrNot = 1 WHERE id = $id',
+    );
+  }
 
 }

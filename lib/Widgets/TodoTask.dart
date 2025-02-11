@@ -1,5 +1,6 @@
 import 'package:desafiomobile/ViewModels/TaskViewModel.dart';
 import 'package:desafiomobile/Widgets/MinimumWidgets/CustomCheckBox.dart';
+import 'package:desafiomobile/Views/TodoView.dart';
 import 'package:desafiomobile/Models/TaskModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,17 @@ class _TodoTask extends State<TodoTask>{
   void updateCheckBoxState(bool value){
     setState(() {
       isChecked = value;
+      tvm.taskIsDone(widget.taskModel.id.toString());
+      Future.delayed(Duration(seconds: 1), (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => TodoView()
+            )
+        );
+      });
     });
+
   }
 
   void openCloseTitle(){

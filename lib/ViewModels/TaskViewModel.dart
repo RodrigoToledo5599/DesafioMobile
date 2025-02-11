@@ -57,4 +57,9 @@ class TaskViewModel{
   void deleteATask(String id){
     db.deleteATask(id);
   }
+
+  void taskIsDone(String id){
+    db.TaskIsDone(id);
+  }
+
 }
